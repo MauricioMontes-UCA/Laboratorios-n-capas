@@ -14,4 +14,8 @@ public class SpecimenList {
 
         );
     }
+
+    public List<Specimen> getSpecimens() {
+        return specimens;
+    }
 }
