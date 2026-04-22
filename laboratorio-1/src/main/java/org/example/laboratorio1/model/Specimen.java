@@ -4,6 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.example.laboratorio1.model.enums.BaseVirus;
+import org.example.laboratorio1.model.enums.DangerLevel;
+import org.example.laboratorio1.model.enums.LastLocation;
+import org.example.laboratorio1.model.enums.Status;
 
 @Data
 @Builder
@@ -11,10 +15,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Specimen {
     private String name;
-    private String baseVirus;
-    private int dangerLevel;
+    private BaseVirus baseVirus;
+    private DangerLevel dangerLevel;
     private String weakSpot;
-    private String status;
-    private String lastLocation;
+    private Status status;
+    private LastLocation lastLocation;
     private String nextPossibleOutbreak;
 }
