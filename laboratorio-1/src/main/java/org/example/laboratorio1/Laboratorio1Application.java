@@ -23,7 +23,6 @@ public class Laboratorio1Application {
                         tag + "Nombre: " + specimen.getName() + " | "
                             + "Nivel de Peligro: " + specimen.getDangerLevel().getLevel() + " | "
                             + "Punto débil: " + specimen.getWeakSpot()
-
                 ));
         };
     }
