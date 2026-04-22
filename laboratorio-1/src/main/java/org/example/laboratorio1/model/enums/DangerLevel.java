@@ -1,5 +1,8 @@
 package org.example.laboratorio1.model.enums;
 
+import lombok.Getter;
+
+@Getter
 public enum DangerLevel {
     ONE(1),
     TWO(2),
@@ -11,10 +14,6 @@ public enum DangerLevel {
 
     DangerLevel(int level) {
         this.level = level;
-    }
-
-    public int getLevel() {
-        return level;
     }
 
     // Honestamente, no sé trabajar con Enums, solo sabía que era para normalizar
