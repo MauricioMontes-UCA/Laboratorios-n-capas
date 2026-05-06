@@ -1,0 +1,3 @@
+CREATE DATABASE db_labo_2;
+
+CREATE TABLE Products
