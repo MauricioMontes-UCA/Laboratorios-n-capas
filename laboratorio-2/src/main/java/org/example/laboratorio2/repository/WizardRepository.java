@@ -13,7 +13,7 @@ public interface WizardRepository extends JpaRepository<Wizard, UUID> {
 
     List<Wizard> getWizardsByPatronus(String patronus);
 
-    List<Wizard> getWizardsByIsDeatheter(Boolean isDeatheter);
+    List<Wizard> getWizardsByIsDeatheater(Boolean isDeatheater);
 
     void deleteWizardById(UUID id);
 }

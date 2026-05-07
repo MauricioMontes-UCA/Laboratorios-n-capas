@@ -26,6 +26,6 @@ public class Wizard {
     @Column(name = "patronus")
     private String patronus;
 
-    @Column(name = "deatheter")
-    private Boolean isDeatheter;
+    @Column(name = "deatheater")
+    private Boolean isDeatheater;
 }

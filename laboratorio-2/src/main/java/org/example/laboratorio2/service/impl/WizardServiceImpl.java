@@ -26,7 +26,7 @@ public class WizardServiceImpl implements WizardService {
 
     @Override
     public List<Wizard> getAllDeatheaters() {
-        return wizardRepository.getWizardsByIsDeatheter(true);
+        return wizardRepository.getWizardsByIsDeatheater(true);
     }
 
     @Override
@@ -35,7 +35,7 @@ public class WizardServiceImpl implements WizardService {
         wizard.setName(newWizard.getName());
         wizard.setHouse(newWizard.getHouse());
         wizard.setPatronus(newWizard.getPatronus());
-        wizard.setIsDeatheter(newWizard.getIsDeatheter());
+        wizard.setIsDeatheater(newWizard.getIsDeatheater());
         wizardRepository.save(wizard);
     }
 
