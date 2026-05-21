@@ -9,7 +9,9 @@ import org.example.laboratorio3.services.impl.SpecimenServiceImpl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @RestController
@@ -18,9 +20,23 @@ import java.util.UUID;
 public class SpecimenController {
     private final SpecimenServiceImpl specimenService;
 
+    public ResponseEntity<GeneralResponse> buildResponse(String message, HttpStatus status, Object data) {
+        String uri = ServletUriComponentsBuilder.fromCurrentRequestUri().build().getPath();
+        return ResponseEntity
+                .status(status)
+                .body(GeneralResponse.builder()
+                        .uri(uri)
+                        .message(message)
+                        .status(status.value())
+                        .time(LocalDateTime.now())
+                        .data(data)
+                        .build()
+                );
+    }
+
     @PostMapping("/specimen")
     public ResponseEntity<GeneralResponse> createSpecimen(@RequestBody @Valid CreateSpecimenRequest request) {
-        return GeneralResponse.buildResponse(
+        return buildResponse(
                 "Specimen was successfully added to the Records.",
                 HttpStatus.CREATED,
                 specimenService.createSpecimen(request)
@@ -34,7 +50,7 @@ public class SpecimenController {
             @RequestParam(defaultValue = "id") String sortBy,
             @RequestParam(defaultValue = "asc") String sortOrder
     ) {
-        return GeneralResponse.buildResponse(
+        return buildResponse(
                 "Specimens found",
                 HttpStatus.OK,
                 specimenService.getAllSpecimens(page, size, sortBy, sortOrder)
@@ -43,7 +59,7 @@ public class SpecimenController {
 
     @GetMapping("/specimen/{id}")
     public ResponseEntity<GeneralResponse> getSpecimenById(@PathVariable UUID id) {
-        return GeneralResponse.buildResponse(
+        return buildResponse(
                 "Specimen found",
                 HttpStatus.FOUND,
                 specimenService.getSpecimenById(id)
@@ -55,7 +71,7 @@ public class SpecimenController {
             @PathVariable UUID id,
             @RequestBody UpdateSpecimenRequest request
     ) {
-        return GeneralResponse.buildResponse(
+        return buildResponse(
                 "Specimen updated successfully",
                 HttpStatus.OK,
                 specimenService.updateSpecimen(id, request)
@@ -64,13 +80,10 @@ public class SpecimenController {
 
     @DeleteMapping("/specimen/{id}")
     public ResponseEntity<GeneralResponse> deleteSpecimenById(@PathVariable UUID id) {
-        return GeneralResponse.buildResponse(
-                "Specimen deleted succesfully from the Records",
+        return buildResponse(
+                "Specimen deleted successfully from the Records",
                 HttpStatus.OK,
                 specimenService.deleteSpecimen(id)
         );
     }
-
-
-
 }
