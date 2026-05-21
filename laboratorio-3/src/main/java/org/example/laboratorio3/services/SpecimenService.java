@@ -2,7 +2,7 @@ package org.example.laboratorio3.services;
 
 import org.example.laboratorio3.domain.dto.requests.CreateSpecimenRequest;
 import org.example.laboratorio3.domain.dto.requests.UpdateSpecimenRequest;
-import org.example.laboratorio3.domain.dto.response.SpecimenResponse;
+import org.example.laboratorio3.domain.dto.response.specimen.SpecimenResponse;
 
 import java.util.List;
 import java.util.UUID;

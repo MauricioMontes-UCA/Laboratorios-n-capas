@@ -1,4 +1,4 @@
-package org.example.laboratorio3.domain.dto.requests.specimens;
+package org.example.laboratorio3.domain.dto.requests;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
