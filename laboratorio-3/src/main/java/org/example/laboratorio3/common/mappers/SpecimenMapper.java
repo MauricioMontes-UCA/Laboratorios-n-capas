@@ -4,6 +4,7 @@ import org.example.laboratorio3.domain.dto.requests.CreateSpecimenRequest;
 import org.example.laboratorio3.domain.dto.requests.UpdateSpecimenRequest;
 import org.example.laboratorio3.domain.dto.response.specimen.SpecimenResponse;
 import org.example.laboratorio3.domain.entities.Specimen;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -39,5 +40,7 @@ public class SpecimenMapper {
                 .build();
     }
 
-    // TODO: Mapper using pagination
+    public static Page<SpecimenResponse> toDTOList (Page<Specimen> specimens) {
+        return specimens.map(SpecimenMapper::toDTO);
+    }
 }

@@ -5,11 +5,16 @@ import lombok.RequiredArgsConstructor;
 import org.example.laboratorio3.common.mappers.SpecimenMapper;
 import org.example.laboratorio3.domain.dto.requests.CreateSpecimenRequest;
 import org.example.laboratorio3.domain.dto.requests.UpdateSpecimenRequest;
+import org.example.laboratorio3.domain.dto.response.PageableResponse;
 import org.example.laboratorio3.domain.dto.response.specimen.SpecimenResponse;
 import org.example.laboratorio3.domain.entities.Specimen;
 import org.example.laboratorio3.exceptions.ResourceNotFoundException;
 import org.example.laboratorio3.repositories.SpecimenRepository;
 import org.example.laboratorio3.services.SpecimenService;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,13 +35,24 @@ public class SpecimenServiceImpl implements SpecimenService {
     }
 
     @Override
-    public List<SpecimenResponse> getAllSpecimens() {
-        List<Specimen> specimens = specimenRepository.findAll();
-        if (specimens.isEmpty())
-            throw new ResourceNotFoundException("No specimens are registered in Hyrule Records");
-        return specimens.stream()
-                .map(SpecimenMapper::toDTO)
-                .collect(Collectors.toList());
+    public PageableResponse<SpecimenResponse> getAllSpecimens(int page, int size, String sortBy, String sortOrder) {
+        Sort sort = sortOrder.equalsIgnoreCase("desc") ?
+                Sort.by(sortBy).descending() :
+                Sort.by(sortBy).ascending();
+
+        Pageable pageable = PageRequest.of(page, size, sort);
+        Page<SpecimenResponse> specimenResponsePage = SpecimenMapper.toDTOList(specimenRepository.findAll(pageable));
+
+        if (specimenResponsePage.getTotalElements() == 0)
+            throw new ResourceNotFoundException("No products are registered");
+
+        return PageableResponse.<SpecimenResponse>builder()
+                .content(specimenResponsePage.getContent())
+                .page(specimenResponsePage.getNumber())
+                .size(specimenResponsePage.getSize())
+                .totalElements(specimenResponsePage.getTotalElements())
+                .last(specimenResponsePage.isLast())
+                .build();
     }
 
     @Override
