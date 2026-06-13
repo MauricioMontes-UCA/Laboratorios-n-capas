@@ -16,7 +16,7 @@ import java.util.UUID;
 public class WizardController {
     private final WizardServiceImpl wizardService;
 
-    @PostMapping("/")
+    @PostMapping
     public ResponseEntity<Wizard> addWizard(@RequestBody Wizard wizard) {
         wizardService.createWizard(wizard);
         return ResponseEntity
@@ -24,7 +24,7 @@ public class WizardController {
                 .body(wizard);
     }
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<List<Wizard>> getWizards() {
         return ResponseEntity
                 .status(HttpStatus.OK)

@@ -47,7 +47,7 @@ public class WizardServiceImpl implements WizardService {
     @Override
     public Wizard deleteWizardById(UUID id) {
         Wizard deleted = wizardRepository.getWizardById(id);
-        wizardRepository.deleteWizardById(id);
+        wizardRepository.deleteById(id);
         return deleted;
     }
 }
